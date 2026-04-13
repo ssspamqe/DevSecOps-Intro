@@ -145,11 +145,9 @@ In `labs/submission5.md`, document:
    docker run --rm --network host \
      -v "$(pwd)/labs/lab5":/zap/wrk/:rw \
      zaproxy/zap-stable:latest \
-     zap.sh -cmd -port 8090 \
+     zap.sh -cmd \
       -autorun /zap/wrk/scripts/zap-auth.yaml
    ```
-
-   > **Note:** `-port 8090` avoids conflicts with other services on port 8080 (ZAP's default).
 
    <details>
    <summary>📝 ZAP Configuration Explained</summary>
@@ -185,7 +183,10 @@ In `labs/submission5.md`, document:
 
 #### 2.4: Multi-Tool Specialized Scanning
 
-> **💡 Networking Note:** All tools use `--network host` to share the host's network and access Juice Shop on `localhost:3000`.
+> **💡 Networking Note:** Docker networking varies by tool:
+> - `--network host`: Shares host's network (ZAP, Nuclei, Nikto)
+> - `--network container:NAME`: Shares another container's network namespace (SQLmap)
+> Use the pattern shown in each command for best compatibility.
 
 1. **Nuclei Template-Based Scan:** ⏱️ ~5 minutes
 
@@ -203,29 +204,29 @@ In `labs/submission5.md`, document:
    ```bash
    docker run --rm --network host \
      -v "$(pwd)/labs/lab5/nikto":/tmp \
-     alpine/nikto \
+     sullo/nikto:latest \
      -h http://localhost:3000 -o /tmp/nikto-results.txt
    ```
    
 
 3. **SQLmap SQL Injection Test:** ⏱️ ~10-20 minutes per endpoint
 
-   > **Network:** Uses `--network host` like the other tools to access Juice Shop on `localhost:3000`
+   > **Network Solution:** Share the network namespace with Juice Shop container so SQLmap can access `localhost:3000`
 
    ```bash
    # Test both vulnerable endpoints - Search (GET) and Login (POST JSON)
    docker run --rm \
-     --network host \
+     --network container:juice-shop-lab5 \
      -v "$(pwd)/labs/lab5/sqlmap":/output \
-     secsi/sqlmap \
+     sqlmapproject/sqlmap \
      -u "http://localhost:3000/rest/products/search?q=*" \
      --dbms=sqlite --batch --level=3 --risk=2 \
      --technique=B --threads=5 --output-dir=/output
 
    docker run --rm \
-     --network host \
+     --network container:juice-shop-lab5 \
      -v "$(pwd)/labs/lab5/sqlmap":/output \
-     secsi/sqlmap \
+     sqlmapproject/sqlmap \
      -u "http://localhost:3000/rest/user/login" \
      --data '{"email":"*","password":"test"}' \
      --method POST \
@@ -239,7 +240,8 @@ In `labs/submission5.md`, document:
    **How this works:**
 
    **Networking:**
-   - `--network host` - Shares the host network so `localhost:3000` reaches Juice Shop directly
+   - `--network container:juice-shop-lab5` - Shares network namespace with Juice Shop container
+   - Inside SQLmap container, `localhost:3000` now directly reaches Juice Shop (no DNS/port forwarding needed)
 
    **Endpoint 1 - Search (GET):**
    - URL: `http://localhost:3000/rest/products/search?q=*`
