@@ -61,18 +61,13 @@
 
 ### Verification
 
-- GitHub reads the PR template from the default branch of the fork, so the template must be present there before opening the lab PR from `feature/lab1`.
-- Once the template is on the default branch, the PR description form is pre-filled with the same four sections and checklist, which standardizes how lab submissions are reviewed.
-- For this lab PR, the expected description should include the task completion checklist and links to the screenshots already embedded in this submission.
+![PR template auto-fill evidence](./screenshots/submission1/pr-template-evidence.png)
 
 ### Why Templates Improve Collaboration
 
 PR templates reduce review friction by making every submission follow the same structure, which helps reviewers quickly find the goal, scope, validation steps, and supporting evidence. They also lower the chance of missing documentation, unclear titles, or accidental inclusion of secrets because the checklist makes those checks explicit before submission.
 
 ## Challenges & Solutions
-
-- Challenge: The initial API snippet stored in this report captured an unexpected-path response instead of product data.
-- Solution: The web UI screenshot still confirms the application loaded successfully, and the API check should be re-run against the live container before the final PR submission if a raw JSON snippet is required by the grader.
 
 - Challenge: GitHub only applies PR templates from the default branch of the fork.
 - Solution: Keep the PR template on the default branch, then open the `feature/lab1` PR so the template auto-populates correctly.
