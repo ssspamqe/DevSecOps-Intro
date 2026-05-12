@@ -39,14 +39,65 @@
 
 
 ## Surface Snapshot (Triage)
-- Login/Registration visible: [V] Yes  [ ] No
-- Product listing/search present: [V] Yes  [ ] No
-- Admin or account area discoverable: [V] Yes  [ ] No
-- Client-side errors in console: [ ] Yes  [V] No
+- Login/Registration visible: [V] Yes  [ ] No — notes: Login and sign-up actions are visible from the main navigation and account menu.
+- Product listing/search present: [V] Yes  [ ] No — notes: The home page exposes the catalog grid, categories, and a search field for browsing products.
+- Admin or account area discoverable: [V] Yes  [ ] No — notes: Account-related pages are reachable from the navbar, and administrative functionality is a known attack surface in Juice Shop.
+- Client-side errors in console: [ ] Yes  [V] No — notes: No blocking browser console errors were observed while loading the home page.
 - Security headers (quick look — optional): `curl -I http://127.0.0.1:3000` → CSP/HSTS present? - notes: No, there are no `Content-Security-Policy`
 
 ## Risks Observed (Top 3)
 1) No special security headers, so the app is more vulnerable to attacks like XSS and clickjacking.
 2) SQL-injection. We can simply enter the `'` in login and get the exact query used for selecting from `Users` table, which is vulnerable to SQL-injection.
 ![SQL-injection](./screenshots/submission1/sql-injection.png)
-3) Usage of HTTP protoctol: Our requests are not encrypted, so they can be easily intercepted and modified by attackers.
+3) Usage of HTTP protocol: Our requests are not encrypted, so they can be intercepted and modified by attackers on an untrusted network.
+
+## PR Template Setup
+
+### Creation Process
+
+- The repository PR template was already configured on the default branch of the fork before opening the lab PR.
+- The template contains the required sections: **Goal**, **Changes**, **Testing**, and **Artifacts & Screenshots**.
+- The template also includes a short checklist for PR title quality, documentation updates, and secret or temporary file review.
+
+### Verification
+
+![PR template auto-fill evidence](./screenshots/submission1/pr-template-evidence.png)
+
+### Why Templates Improve Collaboration
+
+PR templates reduce review friction by making every submission follow the same structure, which helps reviewers quickly find the goal, scope, validation steps, and supporting evidence. They also lower the chance of missing documentation, unclear titles, or accidental inclusion of secrets because the checklist makes those checks explicit before submission.
+
+## Challenges & Solutions
+
+- Challenge: GitHub only applies PR templates from the default branch of the fork.
+- Solution: Keep the PR template on the default branch, then open the `feature/lab1` PR so the template auto-populates correctly.
+
+## GitHub Community
+
+Starring repositories helps with open-source discovery and bookmarking, and it also gives maintainers a visible signal that their project is useful to the community. Following developers is useful for team projects and professional growth because it helps track relevant work, learn from others' activity, and stay connected with classmates, TAs, and maintainers.
+
+### Evidence
+
+- Starred the course repository:
+
+![Starred course repository](./screenshots/submission1/gh-main-repo-star.png)
+
+- Starred `simple-container-com/api`:
+
+![Starred simple-container-com/api](./screenshots/submission1/gh-simple-container-star.png)
+
+- Followed professor and TAs:
+
+![Followed @Cre-eD](./screenshots/submission1/gh-follow-creed.png)
+
+![Followed @marat-biriushev](./screenshots/submission1/gh-follow-marat-biriushev.png)
+
+![Followed @pierrepicaud](./screenshots/submission1/gh-follow-pierrepicaud.png)
+
+- Followed at least three classmates:
+
+![Followed classmate 1](./screenshots/submission1/gh-classmate-follow-1.png)
+
+![Followed classmate 2](./screenshots/submission1/gh-classmate-follow-2.png)
+
+![Followed classmate 3](./screenshots/submission1/gh-classmate-follow-3.png)
