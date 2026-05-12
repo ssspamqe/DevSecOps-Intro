@@ -50,3 +50,33 @@
 2) SQL-injection. We can simply enter the `'` in login and get the exact query used for selecting from `Users` table, which is vulnerable to SQL-injection.
 ![SQL-injection](./screenshots/submission1/sql-injection.png)
 3) Usage of HTTP protoctol: Our requests are not encrypted, so they can be easily intercepted and modified by attackers.
+
+## GitHub Community
+
+Starring repositories helps with open-source discovery and bookmarking, and it also gives maintainers a visible signal that their project is useful to the community. Following developers is useful for team projects and professional growth because it helps track relevant work, learn from others' activity, and stay connected with classmates, TAs, and maintainers.
+
+### Evidence
+
+- Starred the course repository:
+
+![Starred course repository](./screenshots/submission1/gh-main-repo-star.png)
+
+- Starred `simple-container-com/api`:
+
+![Starred simple-container-com/api](./screenshots/submission1/gh-simple-container-star.png)
+
+- Followed professor and TAs:
+
+![Followed @Cre-eD](./screenshots/submission1/gh-follow-creed.png)
+
+![Followed @marat-biriushev](./screenshots/submission1/gh-follow-marat-biriushev.png)
+
+![Followed @pierrepicaud](./screenshots/submission1/gh-follow-pierrepicaud.png)
+
+- Followed at least three classmates:
+
+![Followed classmate 1](./screenshots/submission1/gh-classmate-follow-1.png)
+
+![Followed classmate 2](./screenshots/submission1/gh-classmate-follow-2.png)
+
+![Followed classmate 3](./screenshots/submission1/gh-classmate-follow-3.png)
